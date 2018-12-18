@@ -17,30 +17,24 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
+# World.py
 # TODO: FILE DESCRIPTION
-#
-import sys
-from PyQt5 import QtWidgets
-
-from data.AdministrativeUnit import AdministrativeUnit
-from data.mongo_setup import global_init
-from menu.Editor2d import Editor2d
+# 
+import datetime
+import mongoengine as mongoengine
 
 
-def main():
-    global_init('test')
+class World(mongoengine.Document):
+    created = mongoengine.DateTimeField(default=datetime.datetime.now)
+    name = mongoengine.StringField(required=True)
 
-    p = AdministrativeUnit()
-    p.name = "Test"
-    p.save()
-
-    app = QtWidgets.QApplication(sys.argv)
-    w = Editor2d()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()
+    meta = {
+        'db_alias': 'core',
+        'collection': 'world',
+        'indexes': [
+            'created',
+            'name'
+        ],
+        'ordering': ['name']
+    }
+    # TODO: World - file is a template

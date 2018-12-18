@@ -14,33 +14,43 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-# Contact me at jakub.niedzwiedz98@gmail.com,
+# Contact me at akub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
+# Editor2d.py
 # TODO: FILE DESCRIPTION
-#
-import sys
+# 
+
 from PyQt5 import QtWidgets
-
-from data.AdministrativeUnit import AdministrativeUnit
-from data.mongo_setup import global_init
-from menu.Editor2d import Editor2d
-
-
-def main():
-    global_init('test')
-
-    p = AdministrativeUnit()
-    p.name = "Test"
-    p.save()
-
-    app = QtWidgets.QApplication(sys.argv)
-    w = Editor2d()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    sys.exit(app.exec_())
+from view.editor2d import Ui_MainWindow
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtCore import Qt
 
 
-if __name__ == '__main__':
-    main()
+class Editor2d(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.mouse_pressed = False
+
+    #
+    # Drawing map.
+    #
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setPen(QPen(Qt.black, 2, Qt.SolidLine))
+
+    #
+    # Handling mouse actions.
+    #
+    def mousePressEvent(self, event):
+        self.mouse_pressed = True
+
+    def mouseReleaseEvent(self, event):
+        self.mouse_pressed = False
+
+    def mouseMoveEvent(self, event):
+        if self.mouse_pressed:
+            self.repaint()

@@ -17,30 +17,27 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
+# AdministrativeUnit.py
 # TODO: FILE DESCRIPTION
-#
-import sys
-from PyQt5 import QtWidgets
-
-from data.AdministrativeUnit import AdministrativeUnit
-from data.mongo_setup import global_init
-from menu.Editor2d import Editor2d
+# 
+import datetime
+import mongoengine as mongoengine
+from data.Coordinates import Coordinates
 
 
-def main():
-    global_init('test')
+class AdministrativeUnit(mongoengine.Document):
+    created = mongoengine.DateTimeField(default=datetime.datetime.now)
+    name = mongoengine.StringField(required=True)
+    borders = mongoengine.ListField(mongoengine.ObjectIdField())
+    coordinates = Coordinates(0, 0)
 
-    p = AdministrativeUnit()
-    p.name = "Test"
-    p.save()
-
-    app = QtWidgets.QApplication(sys.argv)
-    w = Editor2d()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()
+    meta = {
+        'db_alias': 'core',
+        'collection': 'administrative-units',
+        'indexes': [
+            'created',
+            'name'
+        ],
+        'ordering': ['name']
+    }
+    # TODO: AdministrativeUnit - file is a template

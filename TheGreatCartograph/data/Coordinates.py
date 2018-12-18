@@ -17,30 +17,32 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
-# TODO: FILE DESCRIPTION
-#
-import sys
-from PyQt5 import QtWidgets
-
-from data.AdministrativeUnit import AdministrativeUnit
-from data.mongo_setup import global_init
-from menu.Editor2d import Editor2d
+# Coordinates.py
+# Class that is used to store coordinates on globe.
+# 
 
 
-def main():
-    global_init('test')
+class Coordinates:
+    latitude = 0  # parallel to the equator, -90° - 90°
+    longitude = 0  # angle from prime meridian, with vertex at pole, -180° - 180°
 
-    p = AdministrativeUnit()
-    p.name = "Test"
-    p.save()
+    def __init__(self, latitude, longitude):
+        super().__init__()
+        self.latitude = latitude
+        self.longitude = longitude
 
-    app = QtWidgets.QApplication(sys.argv)
-    w = Editor2d()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    sys.exit(app.exec_())
+    @property
+    def x(self):
+        return self.longitude
 
+    @x.setter
+    def x(self, x):
+        self.longitude = x
 
-if __name__ == '__main__':
-    main()
+    @property
+    def y(self):
+        return self.latitude
+
+    @y.setter
+    def y(self, y):
+        self.latitude = y
