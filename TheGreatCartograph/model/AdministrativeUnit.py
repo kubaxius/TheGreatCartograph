@@ -14,43 +14,35 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-# Contact me at akub.niedzwiedz98@gmail.com,
+# Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# Editor2d.py
+# AdministrativeUnit.py
 # TODO: FILE DESCRIPTION
 # 
-
-from PyQt5 import QtWidgets
-from view.editor2d import Ui_MainWindow
-from PyQt5.QtGui import QPainter, QPen
-from PyQt5.QtCore import Qt
+import datetime
+import mongoengine as mongoengine
+from model.Coordinates import Coordinates
 
 
-class Editor2d(QtWidgets.QMainWindow):
-    def __init__(self):
+class AdministrativeUnit(mongoengine.EmbeddedDocument):
+    created = mongoengine.DateTimeField(default=datetime.datetime.now)
+    name = mongoengine.StringField(required=True)
+    administrative_units = mongoengine.ListField(mongoengine.ObjectIdField())
+    borders = mongoengine.ListField(mongoengine.ObjectIdField())
+    coordinates = Coordinates(0, 0)
+
+    def __init__(self, x: float, y: float):
         super().__init__()
+        self.coordinates = Coordinates(x, y)
 
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.mouse_pressed = False
-
-    #
-    # Drawing map.
-    #
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        painter.setPen(QPen(Qt.black, 2, Qt.SolidLine))
-
-    #
-    # Handling mouse actions.
-    #
-    def mousePressEvent(self, event):
-        self.mouse_pressed = True
-
-    def mouseReleaseEvent(self, event):
-        self.mouse_pressed = False
-
-    def mouseMoveEvent(self, event):
-        if self.mouse_pressed:
-            self.repaint()
+    meta = {
+        'db_alias': 'core',
+        'collection': 'administrative-units',
+        'indexes': [
+            'created',
+            'name'
+        ],
+        'ordering': ['name']
+    }
+    # TODO: AdministrativeUnit - file is a template

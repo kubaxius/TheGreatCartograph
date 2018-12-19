@@ -17,27 +17,18 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# AdministrativeUnit.py
+# MainWindow.py
 # TODO: FILE DESCRIPTION
 # 
-import datetime
-import mongoengine as mongoengine
-from data.Coordinates import Coordinates
+
+from PyQt5 import QtWidgets
+from view.layout.mainwindow import Ui_MainWindow
 
 
-class AdministrativeUnit(mongoengine.Document):
-    created = mongoengine.DateTimeField(default=datetime.datetime.now)
-    name = mongoengine.StringField(required=True)
-    borders = mongoengine.ListField(mongoengine.ObjectIdField())
-    coordinates = Coordinates(0, 0)
+class MainWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-    meta = {
-        'db_alias': 'core',
-        'collection': 'administrative-units',
-        'indexes': [
-            'created',
-            'name'
-        ],
-        'ordering': ['name']
-    }
-    # TODO: AdministrativeUnit - file is a template
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+    # TODO: MainWindow - file is a template

@@ -20,11 +20,12 @@
 # Coordinates.py
 # Class that is used to store coordinates on globe.
 # 
+import mongoengine
 
 
-class Coordinates:
-    latitude = 0  # parallel to the equator, -90° - 90°
-    longitude = 0  # angle from prime meridian, with vertex at pole, -180° - 180°
+class Coordinates(mongoengine.EmbeddedDocument):
+    longitude = 0  # angle from prime meridian, with vertex at pole, 0° - 360°
+    latitude = 0  # parallel to the equator, 0° - 180°
 
     def __init__(self, latitude, longitude):
         super().__init__()
@@ -46,3 +47,13 @@ class Coordinates:
     @y.setter
     def y(self, y):
         self.latitude = y
+
+    meta = {
+        'db_alias': 'core',
+        'collection': 'world',
+        'indexes': [
+            'created',
+            'name'
+        ],
+        'ordering': ['name']
+    }

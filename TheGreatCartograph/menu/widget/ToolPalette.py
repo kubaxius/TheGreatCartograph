@@ -17,36 +17,15 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
+# ToolPalette.py
 # TODO: FILE DESCRIPTION
-#
-import sys
+# 
+
 from PyQt5 import QtWidgets
-
-# from model.AdministrativeUnit import AdministrativeUnit
-from model.setup import global_init
-from menu.window.MainWindow import MainWindow
-from menu.widget.ToolPalette import ToolPalette
+import data.tool
 
 
-def main():
-    global_init('test')
-
-    # p = AdministrativeUnit()
-    # p.name = "Test"
-    # p.save()
-
-    app = QtWidgets.QApplication(sys.argv)
-    w = MainWindow()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    t = ToolPalette()
-    t.show()
-    # w.addDockWidget(Qt.LeftDockWidgetArea, t)
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()
-
-
+class ToolPalette(QtWidgets.QToolBar):
+    def __init__(self):
+        super().__init__()
+        self.Tool = data.tool.BorderPen()

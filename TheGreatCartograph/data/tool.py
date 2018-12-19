@@ -17,36 +17,19 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# __init__.py
-# TODO: FILE DESCRIPTION
+# tool.py
+# Module consisting of all cursor tools and of their enumeration.
 #
-import sys
-from PyQt5 import QtWidgets
-
-# from model.AdministrativeUnit import AdministrativeUnit
-from model.setup import global_init
-from menu.window.MainWindow import MainWindow
-from menu.widget.ToolPalette import ToolPalette
 
 
-def main():
-    global_init('test')
+class Tool:
+    def __init__(self):
+        super().__init__()
 
-    # p = AdministrativeUnit()
-    # p.name = "Test"
-    # p.save()
-
-    app = QtWidgets.QApplication(sys.argv)
-    w = MainWindow()
-    w.setWindowTitle("TheGreatCartograph")
-    w.show()
-    t = ToolPalette()
-    t.show()
-    # w.addDockWidget(Qt.LeftDockWidgetArea, t)
-    sys.exit(app.exec_())
+    def on_mouse_click(self):
+        pass
 
 
-if __name__ == '__main__':
-    main()
-
-
+class BorderPen(Tool):
+    def __init__(self):
+        super().__init__()

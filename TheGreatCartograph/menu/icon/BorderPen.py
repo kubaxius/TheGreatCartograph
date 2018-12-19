@@ -17,11 +17,13 @@
 # Contact me at jakub.niedzwiedz98@gmail.com,
 # or via LinkedIn: https://www.linkedin.com/in/kuba-nied%C5%BAwied%C5%BA-2a1a3115b/
 # 
-# mongo_setup.py
+# BorderPen.py
 # TODO: FILE DESCRIPTION
-#
-import mongoengine
+# 
+
+from PyQt5 import QtGui
 
 
-def global_init(db_name: str):
-    mongoengine.register_connection(alias='core', name=db_name)
+class BorderPen(QtGui.QIcon):
+    def __init__(self):
+        super().__init__()
