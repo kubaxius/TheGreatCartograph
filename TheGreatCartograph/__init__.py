@@ -22,11 +22,12 @@
 #
 import sys
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
 
 # from model.AdministrativeUnit import AdministrativeUnit
 from model.setup import global_init
-from menu.window.MainWindow import MainWindow
-from menu.widget.ToolPalette import ToolPalette
+from menu.MainWindow import MainWindow
+from menu.ToolPalette import ToolPaletteDocker
 
 
 def main():
@@ -40,9 +41,8 @@ def main():
     w = MainWindow()
     w.setWindowTitle("TheGreatCartograph")
     w.show()
-    t = ToolPalette()
-    t.show()
-    # w.addDockWidget(Qt.LeftDockWidgetArea, t)
+    t = ToolPaletteDocker()
+    w.addDockWidget(Qt.LeftDockWidgetArea, t)
     sys.exit(app.exec_())
 
 

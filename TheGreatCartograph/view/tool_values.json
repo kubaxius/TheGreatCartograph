@@ -1,0 +1,9 @@
+{
+  "BorderPen": {
+    "set_icon": [":/icons/border-pen.png", "Border Pen"],
+    "setChecked": true
+  },
+  "BorderMove": {
+    "set_icon": [":/icons/border-move.png", "Border Move"]
+  }
+}

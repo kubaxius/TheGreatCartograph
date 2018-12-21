@@ -1,5 +1,6 @@
 <RCC>
-  <qresource prefix="newPrefix">
+  <qresource prefix="icons">
     <file>border-pen.png</file>
+    <file>border-move.png</file>
   </qresource>
 </RCC>

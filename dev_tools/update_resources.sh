@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd ../resources/images
-destination="../../TheGreatCartograph/resource"
+destination="../../TheGreatCartograph/resources"
 
 # iterating over all directories in ../resources/images
 for dir in `find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'`; do

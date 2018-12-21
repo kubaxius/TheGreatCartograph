@@ -20,16 +20,31 @@
 # tool.py
 # Module consisting of all cursor tools and of their enumeration.
 #
+import resources.icons
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QAction, QActionGroup
 
 
-class Tool:
-    def __init__(self):
+class Tool(QAction):
+
+    def __init__(self, group: QActionGroup):
         super().__init__()
+        self.setCheckable(True)
+        self.triggered.connect(self.on_triggered)
+        self.setActionGroup(group)
 
-    def on_mouse_click(self):
+    def set_icon(self, icon_path, icon_text):
+        self.setIcon(QIcon(QPixmap(icon_path)))
+        self.setIconText(icon_text)
+        pass
+
+    def on_triggered(self):
         pass
 
 
 class BorderPen(Tool):
-    def __init__(self):
-        super().__init__()
+    pass
+
+
+class BorderMove(Tool):
+    pass
