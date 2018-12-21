@@ -30,15 +30,17 @@ class Tool(QAction):
     def __init__(self, group: QActionGroup):
         super().__init__()
         self.setCheckable(True)
-        self.triggered.connect(self.on_triggered)
+        self.triggered.connect(self.on_trigger_of_button)
         self.setActionGroup(group)
 
     def set_icon(self, icon_path, icon_text):
         self.setIcon(QIcon(QPixmap(icon_path)))
         self.setIconText(icon_text)
+
+    def on_trigger_of_button(self):
         pass
 
-    def on_triggered(self):
+    def on_mouse_click(self):
         pass
 
 

@@ -27,7 +27,7 @@ from PyQt5 import QtWidgets
 import data.tool as tool
 import inspect
 
-
+# TODO: Change type of class from toolbar to QWidget, or something else
 class ToolPalette(QtWidgets.QToolBar):
     """Controller for ToolPalette of TGC.
     """
@@ -36,7 +36,6 @@ class ToolPalette(QtWidgets.QToolBar):
         super().__init__()
         self.actions_instances = []
         self.action_group = QtWidgets.QActionGroup(self)
-        self.setOrientation(Qt.Vertical)
         self.add_tools()
         self.style_tools()
 
